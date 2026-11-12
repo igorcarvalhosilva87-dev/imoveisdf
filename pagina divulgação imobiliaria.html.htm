@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imóveis DF | Compra, Venda, Aluguel e Administração</title>
+    <style>
+        /* Reset e Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #222222;
+            line-height: 1.6;
+        }
+
+        /* Variáveis de Cores (Preto e Dourado) */
+        :root {
+            --primary: #111111;          /* Preto Profundo (Substituindo o Azul) */
+            --primary-dark: #000000;     /* Preto Absoluto para o Rodapé */
+            --secondary: #e5c158;        /* Dourado Claro para Detalhes */
+            --accent: #d4af37;           /* Dourado Clássico (Substituindo o Verde) */
+            --accent-hover: #b5952f;     /* Dourado Escuro ao passar o mouse */
+            --light: #ffffff;
+            --gray: #555555;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .btn-header {
+            background-color: var(--accent);
+            color: var(--primary-dark);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-header:hover {
+            background-color: var(--accent-hover);
+            color: var(--light);
+        }
+
+        /* Seção Principal (Hero) */
+        .hero {
+            background: linear-gradient(rgba(17, 17, 17, 0.88), rgba(17, 17, 17, 0.88)),
+                        url('https://unsplash.com') center/cover;
+            color: var(--light);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #d9d9d9;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--primary-dark);
+            padding: 18px 36px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            transition: transform 0.2s, background-color 0.3s, color 0.3s;
+        }
+
+        .btn-cta:hover {
+            background-color: var(--accent-hover);
+            color: var(--light);
+            transform: translateY(-2px);
+        }
+
+        /* Seção de Serviços */
+        .services {
+            padding: 70px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .services .subtitle {
+            color: var(--gray);
+            margin-bottom: 50px;
+        }
+
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 35px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            border-top: 3px solid var(--accent);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .btn-card {
+            display: inline-block;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-card:hover {
+            background-color: var(--primary);
+            color: var(--accent);
+        }
+
+        /* Seção Regiões do DF */
+        .regions {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 2px solid var(--accent);
+        }
+
+        .regions h2 {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .regions p {
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            color: #cccccc;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 850px;
+            margin: 0 auto 40px auto;
+        }
+
+        .tag {
+            background: rgba(212, 175, 55, 0.1);
+            color: #f0e6c8;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--primary-dark);
+            color: #999999;
+            text-align: center;
+            padding: 35px 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid #222222;
+        }
+
+        footer strong {
+            color: var(--accent);
+        }
+
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .btn-cta {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">IMÓVEIS <span>DF</span></div>
+        <!-- SUBSTITUA O LINK ABAIXO -->
+        <a href="https://igorcarvalhosilva87-dev.github.io/fomulario-imobiliaria/" target="_blank" class="btn-header">Falar com Corretor</a>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="hero">
+        <h1>Soluções Completas em Imóveis no Distrito Federal</h1>
+        <p>Segurança jurídica, avaliação justa e agilidade para comprar, vender, alugar ou administrar o seu patrimônio em Brasília e regiões.</p>
+
+        <!-- SUBSTITUA O LINK ABAIXO -->
+        <a href="https://igorcarvalhosilva8.wixsite.com/ipi-imoveis" target="_blank" class="btn-cta">Acessar Atendimento / Catálogo</a>
+    </section>
+
+    <!-- Serviços -->
+    <section class="services">
+        <h2>Nossos Serviços</h2>
+        <p class="subtitle">Atendimento personalizado para proprietários, compradores e investidores</p>
+
+        <div class="grid-services">
+            <!-- Compra -->
+            <div class="card">
+                <div>
+                    <h3>Compra</h3>
+                    <p>Encontre apartamentos, casas e lotes com documentação verificada e assessoria completa até a entrega das chaves.</p>
+                </div>
+                <!-- SUBSTITUA O LINK ABAIXO -->
+                <a href="https://igorcarvalhosilva87-dev.github.io/fomulario-imobiliaria/" target="_blank" class="btn-card">Quero Comprar</a>
+            </div>
+
+            <!-- Venda -->
+            <div class="card">
+                <div>
+                    <h3>Venda</h3>
+                    <p>Avaliação precisa de mercado, divulgação estratégica e negociação segura para vender seu imóvel pelo melhor valor.</p>
+                </div>
+                <!-- SUBSTITUA O LINK ABAIXO -->
+                <a href="https://igorcarvalhosilva87-dev.github.io/fomulario-imobiliaria/" target="_blank" class="btn-card">Quero Vender</a>
+            </div>
+
+            <!-- Aluguel -->
+            <div class="card">
+                <div>
+                    <h3>Aluguel</h3>
+                    <p>Locação descomplicada com análise de crédito rigorosa e contratos transparentes para inquilinos e proprietários.</p>
+                </div>
+                <!-- SUBSTITUA O LINK ABAIXO -->
+                <a href="https://igorcarvalhosilva87-dev.github.io/fomulario-imobiliaria/" target="_blank" class="btn-card">Ver Opções</a>
+            </div>
+
+            <!-- Administração -->
+            <div class="card">
+                <div>
+                    <h3>Administração</h3>
+                    <p>Gestão completa do seu imóvel alugado. Cuidamos de vistorias, cobranças, repasses e manutenções sem dor de cabeça.</p>
+                </div>
+                <!-- SUBSTITUA O LINK ABAIXO -->
+                <a href="https://igorcarvalhosilva87-dev.github.io/fomulario-imobiliaria/" target="_blank" class="btn-card">Administrar Imóvel</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regiões de Atuação -->
+    <section class="regions">
+        <h2>Atuação em Todo o Distrito Federal</h2>
+        <p>Conhecimento profundo do mercado imobiliário local para oferecer as melhores oportunidades em diversas Regiões Administrativas.</p>
+
+
